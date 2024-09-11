@@ -1,0 +1,39 @@
+name: Using Workflows Reusing
+
+on:
+  workflow_call:
+    inputs:
+      app-name:
+        required: true
+        type: string
+      image-tag:
+        required: true
+        type: string
+      environment:
+        required: true
+        type: string
+    secrets:
+      git_token:
+        required: true
+jobs:
+  cd:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Target Repository
+        uses: actions/checkout@v4
+        with:
+          repository: wo-o/demo-manifest
+          ref: main
+          token: ${{ secrets.git_token }}
+      - name: Update Image Tag
+        uses: mikefarah/yq@master
+        with:
+          cmd: |
+            yq -i '.image.tag = "${{ inputs.image-tag }}"' '${{ inputs.app-name }}/${{ inputs.environment }}.yaml'
+      - name: Push Changed Image Tag
+        run: |
+          git config --global user.name ${{ github.actor }}
+          git config --global user.email ${{ github.actor }}@users.noreply.github.com
+
+          git commit -am "${{ inputs.app-name }}: Update image tag to ${{ inputs.image-tag }}"
+          git push
