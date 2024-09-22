@@ -1,0 +1,13 @@
+custom:
+  prefix: jinn
+  region: ap-northeast-2
+  rawBucketName: ${self:custom.prefix}-video-raw
+  convertedBucketName: ${self:custom.prefix}-video-converted
+  functionName: ${self:custom.prefix}-video-convert
+  mediaConvertRoleName: ${self:custom.prefix}-MediaConvertRole
+  mediaConvertPolicyName: ${self:custom.prefix}-MediaConvertPolicy
+  lambdaRoleName: ${self:custom.prefix}-video-convert-lambda-role
+  lambdaPolicyName: ${self:custom.prefix}-video-convert-lambda-policy
+  s3BucketResources:
+    - arn:aws:s3:::${self:custom.rawBucketName}/*
+    - arn:aws:s3:::${self:custom.convertedBucketName}/*

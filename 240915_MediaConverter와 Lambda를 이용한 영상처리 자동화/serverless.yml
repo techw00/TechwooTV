@@ -1,0 +1,31 @@
+service: video-convert-service
+
+custom: ${file(./custom.yml):custom}
+
+provider:
+  name: aws
+  runtime: python3.11
+  region: ${self:custom.region}
+  # iamRoleStatements를 제거하여 모든 함수에 기본 역할이 적용되지 않도록 함
+
+functions:
+  videoConvert:
+    name: ${self:custom.functionName}
+    handler: lambda_function.lambda_handler
+    role: VideoConvertLambdaRole
+    events:
+      - s3:
+          bucket: ${self:custom.rawBucketName}
+          event: s3:ObjectCreated:*
+          existing: true
+    environment:
+      DestinationS3Bucket: ${self:custom.convertedBucketName}
+      MediaConvertRole: !GetAtt MediaConvertRole.Arn
+
+package:
+  include:
+    - lambda_function.py
+    - job.json
+
+resources:
+  Resources: ${file(./iam-roles.yml):Resources}
