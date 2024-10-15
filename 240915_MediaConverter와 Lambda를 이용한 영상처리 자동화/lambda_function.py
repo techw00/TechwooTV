@@ -79,7 +79,7 @@ def create_mediaconvert_client(region):
 def load_job_settings(job_settings_path, source_s3_uri):
     """job.json 파일을 로드하고 입력 파일 경로를 설정합니다."""
     with open(job_settings_path) as json_file:
-        job_settings = json.load(json_file)
+        job_settings = json.load(json_file)["Settings"]
     job_settings['Inputs'][0]['FileInput'] = source_s3_uri
     return job_settings
 

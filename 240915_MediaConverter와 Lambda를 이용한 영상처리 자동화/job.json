@@ -1,121 +1,123 @@
 {
-  "OutputGroups": [
-    {
-      "CustomName": "mp4",
-      "Name": "File Group",
-      "Outputs": [
-        {
-          "ContainerSettings": {
-            "Container": "MP4",
-            "Mp4Settings": {}
-          },
-          "VideoDescription": {
-            "Width": 1920,
-            "Height": 1080,
-            "CodecSettings": {
-              "Codec": "H_264",
-              "H264Settings": {
-                "MaxBitrate": 51000000,
-                "RateControlMode": "QVBR",
-                "SceneChangeDetect": "TRANSITION_DETECTION"
-              }
-            }
-          },
-          "AudioDescriptions": [
-            {
-              "AudioSourceName": "Audio Selector 1",
+  "Settings": {
+    "OutputGroups": [
+      {
+        "CustomName": "mp4",
+        "Name": "File Group",
+        "Outputs": [
+          {
+            "ContainerSettings": {
+              "Container": "MP4",
+              "Mp4Settings": {}
+            },
+            "VideoDescription": {
+              "Width": 1920,
+              "Height": 1080,
               "CodecSettings": {
-                "Codec": "AAC",
-                "AacSettings": {
-                  "Bitrate": 96000,
-                  "CodingMode": "CODING_MODE_2_0",
-                  "SampleRate": 48000
+                "Codec": "H_264",
+                "H264Settings": {
+                  "MaxBitrate": 51000000,
+                  "RateControlMode": "QVBR",
+                  "SceneChangeDetect": "TRANSITION_DETECTION"
                 }
               }
-            }
-          ],
-          "NameModifier": "_pc"
-        },
-        {
-          "ContainerSettings": {
-            "Container": "MP4",
-            "Mp4Settings": {}
-          },
-          "VideoDescription": {
-            "Width": 1280,
-            "Height": 720,
-            "CodecSettings": {
-              "Codec": "H_264",
-              "H264Settings": {
-                "MaxBitrate": 51000000,
-                "RateControlMode": "QVBR",
-                "SceneChangeDetect": "TRANSITION_DETECTION"
-              }
-            }
-          },
-          "AudioDescriptions": [
-            {
-              "AudioSourceName": "Audio Selector 1",
-              "CodecSettings": {
-                "Codec": "AAC",
-                "AacSettings": {
-                  "Bitrate": 96000,
-                  "CodingMode": "CODING_MODE_2_0",
-                  "SampleRate": 48000
+            },
+            "AudioDescriptions": [
+              {
+                "AudioSourceName": "Audio Selector 1",
+                "CodecSettings": {
+                  "Codec": "AAC",
+                  "AacSettings": {
+                    "Bitrate": 96000,
+                    "CodingMode": "CODING_MODE_2_0",
+                    "SampleRate": 48000
+                  }
                 }
               }
-            }
-          ],
-          "NameModifier": "_mobile"
-        },
-        {
-          "ContainerSettings": {
-            "Container": "RAW"
+            ],
+            "NameModifier": "_pc"
           },
-          "VideoDescription": {
-            "Width": 1920,
-            "Height": 1080,
-            "CodecSettings": {
-              "Codec": "FRAME_CAPTURE",
-              "FrameCaptureSettings": {}
-            }
+          {
+            "ContainerSettings": {
+              "Container": "MP4",
+              "Mp4Settings": {}
+            },
+            "VideoDescription": {
+              "Width": 1280,
+              "Height": 720,
+              "CodecSettings": {
+                "Codec": "H_264",
+                "H264Settings": {
+                  "MaxBitrate": 51000000,
+                  "RateControlMode": "QVBR",
+                  "SceneChangeDetect": "TRANSITION_DETECTION"
+                }
+              }
+            },
+            "AudioDescriptions": [
+              {
+                "AudioSourceName": "Audio Selector 1",
+                "CodecSettings": {
+                  "Codec": "AAC",
+                  "AacSettings": {
+                    "Bitrate": 96000,
+                    "CodingMode": "CODING_MODE_2_0",
+                    "SampleRate": 48000
+                  }
+                }
+              }
+            ],
+            "NameModifier": "_mobile"
           },
-          "NameModifier": "_thumbnail_pc"
-        },
-        {
-          "ContainerSettings": {
-            "Container": "RAW"
+          {
+            "ContainerSettings": {
+              "Container": "RAW"
+            },
+            "VideoDescription": {
+              "Width": 1920,
+              "Height": 1080,
+              "CodecSettings": {
+                "Codec": "FRAME_CAPTURE",
+                "FrameCaptureSettings": {}
+              }
+            },
+            "NameModifier": "_thumbnail_pc"
           },
-          "VideoDescription": {
-            "Width": 1280,
-            "Height": 720,
-            "CodecSettings": {
-              "Codec": "FRAME_CAPTURE",
-              "FrameCaptureSettings": {}
-            }
-          },
-          "NameModifier": "_thumbnail_mobile"
-        }
-      ],
-      "OutputGroupSettings": {
-        "Type": "FILE_GROUP_SETTINGS",
-        "FileGroupSettings": {
-          "Destination": "s3://jinn-video-converted/"
+          {
+            "ContainerSettings": {
+              "Container": "RAW"
+            },
+            "VideoDescription": {
+              "Width": 1280,
+              "Height": 720,
+              "CodecSettings": {
+                "Codec": "FRAME_CAPTURE",
+                "FrameCaptureSettings": {}
+              }
+            },
+            "NameModifier": "_thumbnail_mobile"
+          }
+        ],
+        "OutputGroupSettings": {
+          "Type": "FILE_GROUP_SETTINGS",
+          "FileGroupSettings": {
+            "Destination": "s3://jinn-video-converted/"
+          }
         }
       }
-    }
-  ],
-  "FollowSource": 1,
-  "Inputs": [
-    {
-      "AudioSelectors": {
-        "Audio Selector 1": {
-          "DefaultSelection": "DEFAULT"
-        }
-      },
-      "VideoSelector": {},
-      "TimecodeSource": "ZEROBASED",
-      "FileInput": "s3://jinn-video-raw/test.mov"
-    }
-  ]
+    ],
+    "FollowSource": 1,
+    "Inputs": [
+      {
+        "AudioSelectors": {
+          "Audio Selector 1": {
+            "DefaultSelection": "DEFAULT"
+          }
+        },
+        "VideoSelector": {},
+        "TimecodeSource": "ZEROBASED",
+        "FileInput": "s3://jinn-video-raw/test.mov"
+      }
+    ]
+  }
 }
